@@ -1,0 +1,3 @@
+site/logs/access.log
+site/logs/error.log
+auth/mysql.cnf
