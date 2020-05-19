@@ -15,19 +15,19 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
+###############################################################################################333
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8ztu23uojjw_$6qj1fnux3^*c%0ke529n^_85j72*_1u-so#4u'
+SECRET_KEY = 'desarrollo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['45.33.3.22']
-
-
+ALLOWED_HOSTS = ['127.0.0.1']
+#asignamos la ruta del proyecto
+BASE_PROY = 'C:/desarrollo/python/sitio_ASIS/admin'
+##################################################################################################
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,7 +54,9 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_PROY + '/site/public/static/admin/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,11 +81,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #    }
 #}
+
 DATABASES = {
-    'default': {
+
+'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/proyectos/admin/auth/mysql.cnf',
+            'read_default_file': BASE_PROY + '/auth/mysql.cnf',
         },
     }
 }
@@ -125,4 +129,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/proyectos/admin/site/public/static'
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+#STATIC_ROOT = BASE_PROY + '/site/public/static'
+STATICFILES_DIRS = [
+    os.path.join(SITE_ROOT, "static"),
+    BASE_PROY + 'site/public/static/',
+]
