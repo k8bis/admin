@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gestionAsociados',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -110,11 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-MX'
 
 TIME_ZONE = 'UTC'
 
@@ -133,5 +137,5 @@ SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 #STATIC_ROOT = BASE_PROY + '/site/public/static'
 STATICFILES_DIRS = [
     os.path.join(SITE_ROOT, "static"),
-    BASE_PROY + 'site/public/static/',
+    BASE_PROY + '/site/public/static/',
 ]

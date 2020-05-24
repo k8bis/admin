@@ -18,3 +18,9 @@ main > .container {
 code {
   font-size: 80%;
 }
+
+#header{
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}

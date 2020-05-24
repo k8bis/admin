@@ -1,0 +1,29 @@
+{% extends "tmpl_main.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{%block title%}Autenticacion{% endblock %}
+{%block head%}
+    <link href="{% static 'login/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+        {% if form.errors %}
+            <p class='text-danger'>Usuario y/o contraseña no coinciden. Intente de nuevo por favor.</p>
+        {% endif %}
+        <form class="form-signin" method="post" action="{% url 'login' %}">{% csrf_token %}
+            <div>
+                {{ form.username.label_tag }}
+                {{ form.username|add_class:'form-control' }}
+            </div>
+            <div>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password|add_class:'form-control' }}</td>
+            </div>
+            <div>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </form>
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <!--<p><a href="{% url 'password_reset' %}">Recuperar Contraseña?</a></p>-->
+{% endblock %}

@@ -8,7 +8,6 @@
 
             <!-- Bootstrap core CSS -->
             <link href="{% static 'assets/dist/css/bootstrap.css' %}" rel="stylesheet">
-
             <!-- Custom styles for this template -->
             <link href="{% static 'main/css/sticky-footer-navbar.css' %}" rel="stylesheet">
 
@@ -19,9 +18,9 @@
             <header>
                 {% include "tmpl_header.html" %}
             </header>
-
-            {% block content %}{%endblock%}
-
+            <block>
+                {% block content %}{%endblock%}
+            </block>
             <footer class="footer mt-auto py-3">
                 <div class="container">
                     <span class="text-muted">Rodolfo Rodriguez 2020.</span>
