@@ -1,0 +1,27 @@
+{% extends "tmpl_main.html" %}
+{% load static %}
+{%block title%}
+    {{nombre}}
+{% endblock %}
+{%block head%}
+        <style>
+			code {
+				border:1px solid #aac;
+				margin-left:.9em;
+				margin-right:.9em;
+				margin-bottom:1em;
+				display:block;
+				background-color: rgb(202, 202, 206);
+				font-weight: bold;
+				}
+		</style>
+{%endblock%}
+{%block content%}
+    <div class="container" style="margin-top:100px">
+        {%for proy in proyecto%}
+            <a class="h1">{{proy.nombre}}</a>
+            <p align="justify">{{proy.descripcion}}</p>
+            {{proy.contenido|safe}}
+        {%endfor%}
+    </div>
+{% endblock %}

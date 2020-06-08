@@ -1,0 +1,221 @@
+{% extends "tmpl_main.html" %}
+{% load static %}
+{%block title%}{{nombre}}{% endblock %}
+{%block head%}
+            <!-- Font Awesome icons (free version)-->
+            <script src="{% static 'asociados/js/all.js' %}" crossorigin="anonymous"></script>
+            <!-- Google fonts-->
+            <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+            <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+            <!-- Core theme CSS (includes Bootstrap)-->
+            <link href="{% static 'asociados/css/styles.css' %}" rel="stylesheet" />
+            <style>
+                @media screen and (max-width: 990px) {
+                    #sideNav {
+                        display: none;
+                    }
+                }
+                .img-lang{
+                    height:3rem; 
+                    width:3rem;
+                }
+                .img-plang{
+                    height:3rem; 
+                    width:3rem;
+                }
+            </style>
+{% endblock %}
+{%block content%}
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="sideNav">
+            {%for asoc_pr in asociado%}
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                    <span class="d-block d-lg-none">{{asoc_pr.nombre}}</span>
+                    <span class="d-none d-lg-block">
+                        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static '/admin/media/'%}{{asoc_pr.foto}}" alt="" />
+                    </span>
+                </a>
+            {%endfor%}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experiencia</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Educacion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Intereses</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Cursos y Certificaciones</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#proyects">Proyectos Publicados</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container-fluid p-0">
+            <!-- About-->
+            <section class="resume-section" id="about">
+                <div class="resume-section-content">
+                    {%for asoc in asociado%}
+                        <div class="row">
+                            <h1 class="mb-0 col-11">{{asoc.nombre}} <span class="text-primary">{{asoc.apellidos}}</span></h1>
+                            {%if id_usuario == user.id%}
+                                <div class="col-1"><i class="fas fa-edit" ></i></div>
+                            {%endif%}
+                        </div>
+                        <div class="subheading mb-5">{{asoc.direccion}} · {{asoc.telefono}} · <a href="mailto:{{asoc.email}}">{{asoc.email}}</a></div>
+                        <p class="lead mb-5">{{asoc.descripcion}}</p>
+                        <div class="social-icons">
+                            {%for redsoc in redes_sociales%}
+                                <a class="social-icon" href="{{redsoc.link}}" target="_blank" rel="noopener"><i class="fab {{redsoc.get_redsocial.fabicon}}" target="_blank"></i></a>
+                            {% endfor %}
+                        </div>
+                    {%endfor%}
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Experience-->
+            <section class="resume-section" id="experience">
+                <div class="resume-section-content">
+                    <div class="row">
+                        <h2 class="mb-5 col-11">Experiencia</h2>
+                        {%if id_usuario == user.id%}
+                                <div class="col-1"><i class="fas fa-edit" ></i></div>
+                        {%endif%}
+                    </div>
+                    {%for exper in experiencialab%}
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                            <div class="flex-grow-1">
+                                <h3 class="mb-0">{{exper.get_puesto.nombre}}</h3>
+                                <div class="subheading mb-3">{{exper.get_empresa.nombre}}</div>
+                                <p>{{exper.descripcion}}</p>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <span class="text-primary">
+                                    {{exper.fechainicio|date:"F Y"}} - 
+                                    {% if exper.fechafin %}
+                                        {{exper.fechafin|date:"F Y"}}
+                                    {% else %}
+                                        Empleo Actual
+                                    {%endif%}
+                                </span>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Education-->
+            <section class="resume-section" id="education">
+                <div class="resume-section-content">
+                    <div class="row">
+                        <h2 class="mb-5 col-11">Educación</h2>
+                        {%if id_usuario == user.id%}
+                            <div class="col-1"><i class="fas fa-edit" ></i></div>
+                        {%endif%}
+                    </div>
+                    {%for edu in educacion%}
+                        <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                            <div class="flex-grow-1">
+                                <h3 class="mb-0">{{edu.get_institucion.nombre}}</h3>
+                                <div class="subheading mb-3">{{edu.get_gradoacademico.descripcion}}</div>
+                                <div>{{edu.especialidad}}</div>
+                                <p>{{edu.get_documento.nombre}}</p>
+                            </div>
+                            <div class="flex-shrink-0"><span class="text-primary">{{edu.fechainicio|date:"F Y"}} - {{edu.fechafin|date:"F Y"}}</span></div>
+                        </div>
+                    {%endfor%}
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Skills-->
+            <section class="resume-section" id="skills">
+                <div class="resume-section-content">
+                    <div class="row">
+                        <h2 class="mb-5 col-11">Habilidades</h2>
+                        {%if id_usuario == user.id%}
+                            <div class="col-1"><i class="fas fa-edit" ></i></div>
+                        {%endif%}
+                    </div>
+                    <div class="subheading mb-3">Idiomas que domina</div>
+                    <ul class="list-inline dev-icons">
+                        {%for idi in idiomas%}
+                            <img class="img-lang" src="{% static '/admin/media/'%}{{idi.get_idioma.icono}}" alt="idiomas" />{{idi.porcentaje}}%
+                        {%endfor%}
+                    </ul>
+                    <div class="subheading mb-3">Lenguajes de Programacion & Herramientas</div>
+                    <ul class="list-inline dev-icons">
+                        {%for leng in lenguajes%}
+                            <img class="img-plang" src="{% static '/admin/media/'%}{{leng.get_lenguaje.icono}}" alt="lenguajes" />
+                        {%endfor%}
+                    </ul>
+                    <div class="subheading mb-3">Conocimientos</div>
+                    <ul class="fa-ul mb-0">
+                        {%for hab in habilidades%}
+                            <li>
+                                <span class="fa-li"><i class="fas fa-check"></i></span>{{hab.habilidad}}
+                            </li>
+                        {%endfor%}
+                    </ul>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Interests-->
+            <section class="resume-section" id="interests">
+                <div class="resume-section-content">
+                    <div class="row">
+                        <h2 class="mb-5 col-11">Intereses</h2>
+                        {%if id_usuario == user.id%}
+                            <div class="col-1"><i class="fas fa-edit" ></i></div>
+                        {%endif%}
+                    </div>
+                    {%for asoc in asociado%}
+                        <p>{{asoc.intereses}}</p>
+                    {%endfor%}
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Awards-->
+            <section class="resume-section" id="awards">
+                <div class="resume-section-content">
+                    <div class="row">
+                        <h2 class="mb-5 col-11">Cursos y Certificaciones</h2>
+                        {%if id_usuario == user.id%}
+                            <div class="col-1"><i class="fas fa-edit" ></i></div>
+                        {%endif%}
+                    </div>
+                    <ul class="fa-ul mb-0">
+                        {%for curso in cursos%}
+                            <li>
+                                <span class="fa-li"><i class="fas fa-certificate text-warning"></i></span>{{curso.nombre}}
+                            </li>
+                        {%endfor%}
+                    </ul>
+                </div>
+            </section>
+            <!-- Proyects-->
+            <section class="resume-section" id="proyects">
+                <div class="resume-section-content">
+                    <div class="row">
+                        <h2 class="mb-5 col-11">Proyectos Publicados</h2>
+                        {%if id_usuario == user.id%}
+                            <div class="col-1"><i class="fas fa-edit" ></i></div>
+                        {%endif%}
+                    </div>
+                    <ul class="fa-ul mb-0">
+                        {%for proy in proyectos%}
+                            <li>
+                                <a href="/k8bis/{{proy.id}}">
+                                    <img class="img-plang" src="{% static '/admin/media/'%}{{proy.get_tipo.icono}}" alt="proyectos" />{{proy.nombre}}
+                                </a>
+                            </li>
+                        {%endfor%}
+                    </ul>
+                </div>
+            </section>
+        </div>
+{% endblock %}
+{% block scripts %}
+            <!-- Core theme JS-->
+            <script src="{% static 'asociados/js/scripts.js'%}"></script>
+{%endblock%}

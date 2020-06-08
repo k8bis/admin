@@ -20,11 +20,14 @@ from django.conf.urls.static import static
 
 from django.urls import path, include
 
-from main.views import vw_index
+from main.views import vw_index, dynamic_lookup_view,show_proyecto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', vw_index, name='index' ),
     path('accounts/', include('django.contrib.auth.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', vw_index, name='index' ),
+    path('<str:usr>/',dynamic_lookup_view,name='asociado'),
+    path('<str:usr>/<int:proy>',show_proyecto),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

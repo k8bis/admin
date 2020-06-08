@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gestionAsociados',
+    'gestionAsociados.apps.GestionasociadosConfig',
     'widget_tweaks',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -85,8 +86,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #}
 
 DATABASES = {
-
-'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': BASE_PROY + '/auth/mysql.cnf',
@@ -139,3 +139,6 @@ STATICFILES_DIRS = [
     os.path.join(SITE_ROOT, "static"),
     BASE_PROY + '/site/public/static/',
 ]
+
+MEDIA_ROOT =  BASE_PROY +'/site/public/static/admin/media/'
+MEDIA_URL = '/media/'

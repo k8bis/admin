@@ -29,6 +29,10 @@
 
             <script src="{% static 'index/js/jquery-3.5.1.slim.min.js'%}"></script>
             <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery.slim.min.js'%}"><\/script>')</script>
-            <script src="{% static 'assets/dist/js/bootstrap.bundle.js'%}"></script>
+            <script src="{% static 'index/js/bootstrap.bundle.min.js'%}"></script>
+            <!-- Third party plugin JS-->
+            <script src="{% static 'index/js/jquery.easing.min.js'%}"></script>
+            {% block scripts %}{%endblock%}
+
         </body>
 </html>
