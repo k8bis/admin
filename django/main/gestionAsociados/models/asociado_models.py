@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 from django.core.validators import FileExtensionValidator
 from gestionAsociados.models.catalogos_models import CatalogoRedesSociales, CatalogoLenguajes,CatalogoDocumentosAcademicos
 from gestionAsociados.models.catalogos_models import CatalogoEmpresas, CatalogoPuestos
@@ -23,8 +24,8 @@ class Asociado(models.Model):
     fechanac=models.DateField(verbose_name='Fecha de Nacimiento')
     usuario=models.ForeignKey(User,models.PROTECT,blank=False,null=False,)
     estatus=models.IntegerField(choices=ASOCIADO_ESTATUS,default=INACTIVO)
-    descripcion=models.CharField(max_length=255,null=True)
-    intereses=models.CharField(max_length=255,null=True)
+    descripcion=HTMLField(blank=True,null=True)
+    intereses=HTMLField(blank=True,null=True)
     foto=models.FileField(upload_to='fotosasociados/',validators=[FileExtensionValidator(['svg','png'])])
 
     objects = models.Manager () 
@@ -61,7 +62,7 @@ class ExperienciaLab(models.Model):
     asociado=models.ForeignKey("Asociado",models.PROTECT,blank=False,null=False)
     empresa=models.ForeignKey("CatalogoEmpresas",models.PROTECT,blank=False,null=False)
     puesto=models.ForeignKey("CatalogoPuestos",models.PROTECT,blank=False,null=False)
-    descripcion=models.CharField(max_length=1000,blank=True,null=True)
+    descripcion=HTMLField(blank=True,null=True)
     fechainicio=models.DateField()
     fechafin=models.DateField()
     

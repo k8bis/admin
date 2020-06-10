@@ -94,12 +94,12 @@ class CatalogoHabilidades(models.Model):
 class CatalogoIdiomas(models.Model):
     idioma=models.CharField(max_length=50,blank=False,null=False)
     icono=models.FileField(upload_to='idiomas/',validators=[FileExtensionValidator(['svg'])])
-
-    def __str__(self):
-        return '%s - %s' %(self.pk,self.idioma)
     
     class Meta:
         verbose_name = 'Catalogo de Idioma'
+    
+    def __str__(self):
+        return '%s - %s' %(self.pk,self.idioma)
 
 class CatalogoLenguajes(models.Model):
     lenguaje=models.CharField(max_length=50,blank=False,null=False)
